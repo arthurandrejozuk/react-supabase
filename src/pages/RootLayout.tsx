@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { Header } from "./components/Header"
+import { Header } from "../presentation/Header"
 import { Outlet } from "react-router"
 import { ToastContainer } from "react-toastify"
-import { AuthProvider } from "./app/context/AuthContext"
+import { AuthProvider } from "../app/context/AuthContext"
 
 const Container = styled.div`
   display: flex;

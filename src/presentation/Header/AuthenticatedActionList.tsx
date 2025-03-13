@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 import { useAuthContext } from "../../app/hooks/useAuthContext"
-import { IconAvatar } from "../Icons"
-import { TransparentButton } from "../TransparentButton"
+import { IconAvatar } from "../../components/Icons"
+import { TransparentButton } from "../../components/TransparentButton"
 import { List, ListItem } from "./styles"
 import { useNavigate } from "react-router"
 

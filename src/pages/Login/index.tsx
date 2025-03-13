@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Button } from "../Button";
-import { Fieldset } from "../Fieldset";
-import { Figure, Form, FormActions, Heading, Image } from "../Form";
-import { FormLabel } from "../FormLabel";
-import { TextField } from "../TextField";
+
 import { useAuthContext } from "../../app/hooks/useAuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { Figure, Form, FormActions, Heading, Image } from "../../components/Form";
+import { Fieldset } from "../../components/Fieldset";
+import { FormLabel } from "../../components/FormLabel";
+import { TextField } from "../../components/TextField";
+import { Button } from "../../components/Button";
 
 
-export const FormLogin = () => {
+export const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const navigate = useNavigate();
 
