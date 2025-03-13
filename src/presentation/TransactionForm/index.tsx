@@ -1,22 +1,31 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Form, Heading, Wrapper } from "./styles"
 import { Button } from "../../components/Button"
 import { Card } from "../../components/Card"
 import { TextField } from "../../components/TextField"
 import { FormLabel } from "../../components/FormLabel"
 import { Dropdown } from "../../components/Dropdown"
+import { ListTransactionType } from "../../domain/useCases/ListTransactionType"
+import { TransactionTypeSupabaseRepository } from "../../infra/supabase/TransactionTypeSupabaseRepository"
+import { ITransactionType } from "../../domain/entities/ITransactionType"
 
 export const TransactionForm = () => {
 
+    const listTransactionType = new ListTransactionType(new TransactionTypeSupabaseRepository);
+
     const [transactionType, setTransactionType] = useState('')
     const [transactionValue, setSetTransactionValue] = useState('')
+    const [transactionTypes, setTransactionTypes] = useState<ITransactionType[]>([]);
+
+    useEffect(() => {
+        listTransactionType.execute()
+            .then(data => setTransactionTypes(data))
+    })
 
     const createTransacion = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
-        console.log({
-            transactionType,
-            transactionValue
-        })
+        
+        
     }
 
     return (
@@ -38,7 +47,9 @@ export const TransactionForm = () => {
                             <option value="" disabled hidden>
                                 Selecione o tipo de transação
                             </option>
-                            <option value="saque">Saque</option>
+                            {transactionTypes.map(t => 
+                               <option key={t.id} value={t.display}>{t.display}</option>
+                            )}
                         </Dropdown>
                     </fieldset>
                     <fieldset>
