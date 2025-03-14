@@ -17,11 +17,14 @@ export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [session, setSession] = useState<Session | null>(null)
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
             console.log('getSession', session)
         })
+        .finally(() => setLoading(false))
 
         const {
             data: { subscription },
@@ -51,6 +54,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Possui o valor da sessao e do logout dentro de um provider, no qual permite fazer um logout da sessão
 
     return (
-        <AuthContext.Provider value={{session, logout, login}}>{ children }</AuthContext.Provider>
+        <AuthContext.Provider value={{session, logout, login}}>{ loading ? '' : children }</AuthContext.Provider>
     )
 }

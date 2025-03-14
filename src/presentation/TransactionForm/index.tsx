@@ -20,7 +20,7 @@ export const TransactionForm = () => {
     useEffect(() => {
         listTransactionType.execute()
             .then(data => setTransactionTypes(data))
-    })
+    },[])
 
     const createTransacion = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
